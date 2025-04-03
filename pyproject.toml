@@ -9,7 +9,10 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "streamlit (>=1.43.2,<2.0.0)",
-    "pandas (>=2.2.3,<3.0.0)"
+    "pandas (>=2.2.3,<3.0.0)",
+    "black (>=25.1.0,<26.0.0)",
+    "ruff (>=0.9.10,<0.10.0)",
+    "mypy (>=1.15.0,<2.0.0)"
 ]
 
 

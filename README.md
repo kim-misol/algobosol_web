@@ -25,6 +25,22 @@ make install  # 개발시 `make install-dev`를 사용
 
 - [pandas](https://github.com/pandas-dev/pandas): data manipulation libray
 - [streamlit](https://github.com/streamlit/streamlit)
+
 개발용:
 
 - [poetry](https://python-poetry.org/docs/): dependency manager
+- [black](https://github.com/psf/black): formatter
+- [ruff](https://github.com/astral-sh/ruff): linter
+- [mypy](https://github.com/python/mypy): linter
+
+
+## Makefile 기능
+
+- `make install`: 프로젝트 디펜던시 설치
+- `make install-dev`: 프로젝트 디펜던시 설치 (개발자)
+- `make download-ta-lib`: ta-lib 다운로드
+- `make test`: 테스트 실행
+- `make coverage`: 테스트 실행 (커버리지)
+- `make format`: 프로젝트 코드 포맷
+- `make lint`: 프로젝트에대해 ruff 실행
+- `make run`: 호스트에서 서버 실행
