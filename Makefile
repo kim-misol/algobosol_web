@@ -5,10 +5,12 @@
 	test coverage coverage-html docs badge \
 	docker docker-ci docker-login \
 	check-ta-lib check-env \
-	migrate
+	migrate \
+	setup-env
 
 PROJECT_NAME ?= $(shell sed -n 's/^name = "\(.*\)"/\1/p' pyproject.toml)
 APP_NAME ?= "algobosol"
+APP_FILE ?= app.py
 DOCKER_APP_IMAGE_TAG ?= "$(PROJECT_NAME)"
 
 export AUTH_TOKEN ?= $(or $(GITLAB_ACCESS_TOKEN),$(CI_JOB_TOKEN))
@@ -78,7 +80,7 @@ docs:
 	@poetry run python -m $(APP_NAME) docs generate
 
 run:
-	@poetry run python -m $(APP_NAME) server run
+	@poetry run streamlit run $(APP_FILE)	
 
 collect:
 	@poetry run python -m $(APP_NAME) collect
@@ -97,3 +99,32 @@ check-env:
 ifeq ($(AUTH_TOKEN),)
 	$(error 'GITLAB_ACCESS_TOKEN' is not defined.)
 endif
+
+setup-env:
+	@echo "🔍 Detecting OS..."
+	@unameOut=$$(uname -s); \
+	case $$unameOut in \
+		Darwin*)  \
+			echo "🖥 Detected macOS"; \
+			PYTHON_PATH="/opt/homebrew/bin/python3"; \
+			if [ ! -f $$PYTHON_PATH ]; then \
+				echo "❌ $$PYTHON_PATH not found. Please install Python via Homebrew."; \
+				exit 1; \
+			fi; \
+			poetry env use $$PYTHON_PATH; \
+			;; \
+		Linux*)   \
+			echo "🐧 Detected Linux"; \
+			PYTHON_PATH=$$(which python3); \
+			if [ -z $$PYTHON_PATH ]; then \
+				echo "❌ python3 not found. Please install it via apt."; \
+				exit 1; \
+			fi; \
+			poetry env use $$PYTHON_PATH; \
+			;; \
+		*)        \
+			echo "❌ Unsupported OS"; \
+			exit 1; \
+	esac; \
+	echo "✅ Python environment set to: $$PYTHON_PATH"; \
+	poetry install

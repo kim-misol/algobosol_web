@@ -3,7 +3,7 @@ name = "algobosol"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Sol",email = "sol@timepercentcorp.com"}
+    {name = "Sol",email = "misolkim94@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"
@@ -15,6 +15,21 @@ dependencies = [
     "mypy (>=1.15.0,<2.0.0)"
 ]
 
+[tool.poetry]
+name = "algobosol_web"
+version = "0.1.0"
+description = "웹 인터페이스 for algobosol"
+authors = ["misolkim <your@email.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+streamlit = "^1.43.2"
+pandas = "^2.2.3"
+
+[tool.poetry.dev-dependencies]
+black = "^25.1.0"
+ruff = "^0.9.10"
+mypy = "^1.15.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
