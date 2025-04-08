@@ -1,20 +1,23 @@
 import streamlit as st
 import pandas as pd
 
-# 페이지 제목
-st.title("주식 투자 포트폴리오 관리 데모")
-st.write("이 데모 페이지에서는 기본적인 포트폴리오 정보를 확인할 수 있습니다.")
+st.set_page_config(page_title="알고보솔", layout="wide")
 
+# 예시: 알고리즘 목록, 누적 수익률 차트, 표 등
 # 샘플 포트폴리오 데이터 생성
 data = {
     "종목": ["AAPL", "GOOGL", "TSLA"],
     "보유 수량": [10, 5, 2],
-    "평균 매입가": [150, 2700, 800],
+    "평균 매수가": [150, 2700, 800],
 }
 portfolio = pd.DataFrame(data)
+portfolio["매수금액"] = portfolio["보유 수량"] * portfolio["평균 매수가"]
+portfolio["비중"] = (portfolio["매수금액"] / portfolio["매수금액"].sum() * 100).round(
+    2
+).astype(str) + "%"
 
 # 포트폴리오 테이블 출력
-st.subheader("포트폴리오 현황")
+st.subheader("포트폴리오 현황 (Demo)")
 st.dataframe(portfolio)
 
 # 사이드바를 활용한 항목 추가 (기능 데모)
