@@ -82,6 +82,18 @@ docs:
 run:
 	@poetry run streamlit run $(APP_FILE)	
 
+restart:
+	@echo "🔄 Restarting Streamlit on port 8501..."
+	@PID=$$(lsof -ti :8501); \
+	if [ -n "$$PID" ]; then \
+		echo "⚠️  Killing process on port 8501 (PID: $$PID)"; \
+		kill -9 $$PID; \
+	else \
+		echo "✅ No process using port 8501"; \
+	fi
+	@nohup poetry run streamlit run app.py --server.port 8501 > streamlit.log 2>&1 &
+	@echo "🚀 Streamlit restarted and running in background on port 8501"
+
 collect:
 	@poetry run python -m $(APP_NAME) collect
 
