@@ -26,6 +26,7 @@ python = "^3.12"
 streamlit = "^1.43.2"
 pandas = "^2.2.3"
 pyupbit = "^0.2.34"
+dotenv = "^0.9.9"
 
 [tool.poetry.dev-dependencies]
 black = "^25.1.0"

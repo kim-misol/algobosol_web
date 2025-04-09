@@ -46,7 +46,7 @@ format:
 
 lint:
 	@poetry run black --preview --check .
-	@poetry run ruff check --show-source .
+	@poetry run ruff check --show-files .
 	@poetry run mypy .
 
 test:
