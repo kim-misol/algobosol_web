@@ -3,6 +3,7 @@ import pyupbit
 import pandas as pd
 import streamlit as st
 from dotenv import load_dotenv
+import logging
 
 load_dotenv()  # .env 파일의 변수 로드
 
@@ -30,6 +31,10 @@ with tabs[0]:
         try:
             upbit = pyupbit.Upbit(access_key, secret_key)
             balances = upbit.get_balances()
+            logging.basicConfig(level=logging.DEBUG)
+            logger = logging.getLogger(__name__)
+
+            logger.debug(balances)
 
             st.success("✅ 계정 연동 성공!")
             df = pd.DataFrame(balances)

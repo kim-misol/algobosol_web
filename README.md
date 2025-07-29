@@ -20,6 +20,13 @@ pip install --user poetry
 make install  # 개발시 `make install-dev`를 사용
 ```
 
+.env 파일에 Upbit 와 Creon 의 Access key 와 Secret key 입력
+
+```.env
+ACCESS_KEY=
+SECRET_KEY=
+```
+
 ## Tech Stack
 
 
@@ -44,4 +51,5 @@ make install  # 개발시 `make install-dev`를 사용
 - `make format`: 프로젝트 코드 포맷
 - `make lint`: 프로젝트에대해 ruff 실행
 - `make run`: 호스트에서 서버 실행
+- `make restart`: 백그라운드로 실행 중인 앱 중지하고 재실행
 - `make setup-env`: 환경별로 python 경로 찾아서 자동으로 poetry env use + poetry install 실행
