@@ -58,7 +58,7 @@ for r in rows:
             "수량": r.qty,
             "매입비중": weight,
             "매도완료": r.sold,
-            "상세보기": f"/pages/04_company_analysis.py?id={r.id}",
+            "상세보기": f"/company_analysis?id={r.id}",
         }
     )
 

@@ -128,7 +128,7 @@ else:  # 미리보기
             pdf_iframe_b64(row.pdf_path, height=640), height=660, scrolling=True
         )
 
-    st.page_link("pages/01_기업분석_목록.py", label="◀ 목록으로", icon="🗂️")
+    st.page_link("pages/03_company_overview.py", label="◀ 목록으로", icon="🗂️")
     st.link_button(
         "편집 모드로", url=f"/pages/02_기업분석_상세.py?id={row.id}", type="secondary"
     )
