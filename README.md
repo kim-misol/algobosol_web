@@ -15,10 +15,14 @@ streamlit run app.py
 공격적으로 버전을 업그레이드 하기 때문에 [pyenv](https://github.com/pyenv/pyenv)를
 사용하여 python 설치하는 것을 권장하며 `pip`가 아닌 [poetry](https://python-poetry.org/docs/)를 사용함.
 
+### 1) 설치
 ```shell
 pip install --user poetry
 make install  # 개발시 `make install-dev`를 사용
 ```
+
+### 2) 개발 서버 실행
+`poetry run streamlit run app.py`
 
 .env 파일에 Upbit 와 Creon 의 Access key 와 Secret key 입력
 
