@@ -2,6 +2,7 @@ from __future__ import annotations
 import base64
 from pathlib import Path
 
+
 def pdf_iframe_b64(pdf_path: str | None, height: int = 640) -> str:
     if not pdf_path:
         return "<div style='color:#999'>첨부된 PDF가 없습니다.</div>"

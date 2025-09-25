@@ -1,6 +1,5 @@
 from __future__ import annotations
 from uuid import uuid4
-from pathlib import Path
 import datetime
 import streamlit as st
 
@@ -19,33 +18,61 @@ if isinstance(qid, list):
     qid = qid[0]
 row = db.get_one(int(qid)) if qid else None
 
-mode = st.segmented_control("모드", options=["편집","미리보기"], default="미리보기" if row else "편집")
+mode = st.segmented_control(
+    "모드", options=["편집", "미리보기"], default="미리보기" if row else "편집"
+)
 
 if mode == "편집":
     with st.form("edit_form"):
-        c1, c2, c3 = st.columns([1,1,1])
+        c1, c2, c3 = st.columns([1, 1, 1])
         with c1:
-            date = st.text_input("날짜 (YYYY-MM-DD)", value=row.date if row else datetime.date.today().isoformat())
+            date = st.text_input(
+                "날짜 (YYYY-MM-DD)",
+                value=row.date if row else datetime.date.today().isoformat(),
+            )
         with c2:
             name = st.text_input("종목(제목)", value=row.name if row else "")
         with c3:
-            buy_price = st.number_input("매수 의견(매수가)", min_value=0.0, value=float(row.buy_price) if (row and row.buy_price) else 0.0, step=10.0)
+            buy_price = st.number_input(
+                "매수 의견(매수가)",
+                min_value=0.0,
+                value=float(row.buy_price) if (row and row.buy_price) else 0.0,
+                step=10.0,
+            )
 
-        default_points = "\n".join(row.invest_points) if (row and row.invest_points) else ""
-        invest_points_text = st.text_area("투자 포인트 (줄바꿈으로 구분)", value=default_points, height=120)
+        default_points = (
+            "\n".join(row.invest_points) if (row and row.invest_points) else ""
+        )
+        invest_points_text = st.text_area(
+            "투자 포인트 (줄바꿈으로 구분)", value=default_points, height=120
+        )
 
         st.markdown("#### 본문 (HTML/WYSIWYG)")
         html_value = row.html if row else ""
         try:
             from streamlit_quill import st_quill
-            html_value = st_quill(html=html_value, placeholder="여기에 작성하세요…", key="quill", toolbar=True) or html_value
+
+            html_value = (
+                st_quill(
+                    html=html_value,
+                    placeholder="여기에 작성하세요…",
+                    key="quill",
+                    toolbar=True,
+                )
+                or html_value
+            )
         except Exception:
             html_value = st.text_area("HTML 본문", value=html_value, height=260)
 
         st.markdown("#### PDF 첨부")
         pdf_file = st.file_uploader("PDF 파일 업로드", type=["pdf"])
 
-        qty = st.number_input("수량(선택, 비중 계산용)", min_value=0.0, value=float(row.qty) if (row and row.qty) else 0.0, step=1.0)
+        qty = st.number_input(
+            "수량(선택, 비중 계산용)",
+            min_value=0.0,
+            value=float(row.qty) if (row and row.qty) else 0.0,
+            step=1.0,
+        )
         sold = st.checkbox("매도 완료", value=bool(row.sold) if row else False)
 
         submitted = st.form_submit_button("💾 저장", type="primary")
@@ -61,7 +88,9 @@ if mode == "편집":
                 date=date.strip(),
                 name=name.strip(),
                 buy_price=float(buy_price) if buy_price else None,
-                invest_points=[x.strip() for x in invest_points_text.split("\n") if x.strip()],
+                invest_points=[
+                    x.strip() for x in invest_points_text.split("\n") if x.strip()
+                ],
                 html=html_value or "",
                 pdf_path=pdf_path,
                 qty=float(qty) if qty else None,
@@ -95,7 +124,11 @@ else:  # 미리보기
 
     with right:
         st.subheader("첨부 PDF 미리보기")
-        st.components.v1.html(pdf_iframe_b64(row.pdf_path, height=640), height=660, scrolling=True)
+        st.components.v1.html(
+            pdf_iframe_b64(row.pdf_path, height=640), height=660, scrolling=True
+        )
 
     st.page_link("pages/01_기업분석_목록.py", label="◀ 목록으로", icon="🗂️")
-    st.link_button("편집 모드로", url=f"/pages/02_기업분석_상세.py?id={row.id}", type="secondary")
+    st.link_button(
+        "편집 모드로", url=f"/pages/02_기업분석_상세.py?id={row.id}", type="secondary"
+    )

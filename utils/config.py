@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
+
 @dataclass(frozen=True)
 class Settings:
     root: Path = Path(__file__).resolve().parents[1]
@@ -14,5 +15,6 @@ class Settings:
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.attachments_dir.mkdir(parents=True, exist_ok=True)
         return self
+
 
 SETTINGS = Settings().ensure_dirs()

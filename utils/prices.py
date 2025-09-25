@@ -3,8 +3,10 @@ from typing import Optional
 from cachetools import TTLCache
 from utils.config import SETTINGS
 
+
 class PriceService:
     """증권사 API를 여기로 어댑팅"""
+
     def __init__(self, ttl_seconds: int = SETTINGS.price_ttl_seconds) -> None:
         self._cache = TTLCache(maxsize=2048, ttl=ttl_seconds)
 
@@ -19,5 +21,6 @@ class PriceService:
         price = round(max(1, len(key)) * 123.45, 2)  # 데모
         self._cache[key] = price
         return price
+
 
 price_service = PriceService()

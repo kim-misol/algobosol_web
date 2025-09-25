@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import List, Optional
 from pydantic import BaseModel, Field
 
+
 class AnalysisBase(BaseModel):
     date: str = Field(..., description="YYYY-MM-DD")
     name: str
@@ -12,11 +13,14 @@ class AnalysisBase(BaseModel):
     qty: Optional[float] = None
     sold: bool = False
 
+
 class AnalysisCreate(AnalysisBase):
     pass
 
+
 class AnalysisUpdate(AnalysisBase):
     id: int
+
 
 class AnalysisRead(AnalysisBase):
     id: int
