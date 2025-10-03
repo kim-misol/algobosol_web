@@ -1,37 +1,26 @@
-[project]
-name = "algobosol"
-version = "0.1.0"
-description = ""
-authors = [
-    {name = "Sol",email = "misolkim94@gmail.com"}
-]
-readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "streamlit (>=1.43.2,<2.0.0)",
-    "pandas (>=2.2.3,<3.0.0)",
-    "black (>=25.1.0,<26.0.0)",
-    "ruff (>=0.9.10,<0.10.0)",
-    "mypy (>=1.15.0,<2.0.0)"
-]
-
 [tool.poetry]
 name = "algobosol_web"
 version = "0.1.0"
 description = "웹 인터페이스 for algobosol"
-authors = ["misolkim <your@email.com>"]
+authors = ["Sol <misolkim94@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "algobosol_web" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 streamlit = "^1.43.2"
 pandas = "^2.2.3"
 pyupbit = "^0.2.34"
-dotenv = "^0.9.9"
+python-dotenv = "^1.0.0"
 logging = "^0.4.9.6"
 sqlalchemy = "^2.0.43"
 pydantic = "^2.11.9"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
+pytest = "^6.0.0"
+pytest-mock = "*"
 black = "^25.1.0"
 ruff = "^0.9.10"
 mypy = "^1.15.0"
