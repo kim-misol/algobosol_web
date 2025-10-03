@@ -9,7 +9,7 @@
 	setup-env
 
 PROJECT_NAME ?= $(shell sed -n 's/^name = "\(.*\)"/\1/p' pyproject.toml)
-APP_NAME ?= "algobosol"
+APP_NAME ?= "algobosol_web"
 APP_FILE ?= app.py
 DOCKER_APP_IMAGE_TAG ?= "$(PROJECT_NAME)"
 
