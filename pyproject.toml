@@ -4,16 +4,16 @@ version = "0.1.0"
 description = "web interface for algobosol"
 authors = ["Sol <misolkim94@gmail.com>"]
 readme = "README.md"
-package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.10,<3.13"
 streamlit = "^1.43.2"
 pandas = "^2.2.3"
 pyupbit = "^0.2.34"
 python-dotenv = "^1.0.0"
 sqlalchemy = "^2.0.43"
 pydantic = "^2.11.9"
+plotly = "^6.3.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^6.0.0"
