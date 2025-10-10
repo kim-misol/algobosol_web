@@ -199,7 +199,7 @@ with st.container():
     left, right = st.columns([1, 4], vertical_alignment="center")
     with left:
         st.image(
-            "data/attachments/profile.png",
+            "attachments/profile.png",
             caption=None,
             use_container_width=True,
         )
