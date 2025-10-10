@@ -112,10 +112,12 @@ if st.button("💾 저장", type="primary"):
     for _, r in edited.iterrows():
         pts = [
             x.strip()
-            for x in str(r["투자 포인트"] or "")
-            .replace("·", "\n")
-            .replace(",", "\n")
-            .split("\n")
+            for x in (
+                str(r["투자 포인트"] or "")
+                .replace("·", "\n")
+                .replace(",", "\n")
+                .split("\n")
+            )
             if x.strip()
         ]
         payload.append(
